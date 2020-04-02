@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 import Autre.FabriquerGraph;
 import Autre.InitCouleur;
@@ -17,11 +18,16 @@ public class Main {
 
         InitCouleur IC = new InitCouleur();
 
+        //Pour chosir son fichier parmis les fichiers contenu dans graph
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Veuillez saisir le nom du fichier avec l'extention:");
+        String NomFichier = sc.nextLine();
+
         Graphe gaphe = new Graphe();
         FabriquerGraph FG = new FabriquerGraph();
 
         debut = System.currentTimeMillis();
-        gaphe = FG.FabriquerGraph();
+        gaphe = FG.FabriquerGraph(NomFichier);
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le graphe à été générer en " + fin+"ms");
 
