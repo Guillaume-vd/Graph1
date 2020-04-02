@@ -8,12 +8,8 @@ import java.util.List;
 
 public class InitCouleur {
 
-    public void InitCouleur(){
-
-    }
-
     public void InitCouleur(Graphe graphe){
-        List<Sommet> listSommets = new ArrayList<Sommet>();
+        List<Sommet> listSommets;
         listSommets = graphe.getSommets();
 
         for (Sommet s: listSommets) {

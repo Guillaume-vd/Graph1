@@ -8,13 +8,12 @@ import Algo.*;
 
 
 public class Main {
-    //https://mat.gsia.cmu.edu/COLOR/instances.html
-    //Voir claroline col.b
+    //Tous les graphs da,s le fichier Graphe
 
     public static void main(String[] args) throws IOException {
-        long debut = 0;
-        long fin = 0;
-        int nbCouleur = 0;
+        long debut;
+        long fin;
+        int nbCouleur;
 
         InitCouleur IC = new InitCouleur();
 

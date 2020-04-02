@@ -32,9 +32,11 @@ public class FabriquerGraph {
         while ((line = in.readLine()) != null) {
             if(line.contains("p ")){
                 nbSommet = line.split(" ");
-                nbSommet = nbSommet[2].split(" ");
-                nbS = Integer.parseInt(nbSommet[0]);
-                break;
+                if(nbSommet[0].contains("p")){
+                    nbSommet = nbSommet[2].split(" ");
+                    nbS = Integer.parseInt(nbSommet[0]);
+                    break;
+                }
             }
         }
         in.close();

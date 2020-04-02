@@ -3,7 +3,7 @@ package Type;
 public class Arc {
     private Sommet origine;
     private Sommet arrivee;
-    private int valeur = 0;
+    private int valeur;
 
     public Arc(Sommet origine, Sommet arrivee){
         this.arrivee = arrivee;

@@ -52,13 +52,5 @@ public class Graphe {
     public void ajoutArc(Arc a) {
         this.arcs.add(a);
     }
-    
-    public int SommePoids() {
-        int res = 0;
 
-        for (Arc a : this.arcs)
-            res += a.getValeur();
-
-        return res;
-    }
 }
