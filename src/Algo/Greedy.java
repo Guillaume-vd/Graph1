@@ -12,39 +12,42 @@ public class Greedy {
 
     }
 
-    public int Greedy(Graphe graphe){
+    public static int Greedy(Graphe graphe){
         int ActualColor = 0;
-        List<Sommet> listSommets = new ArrayList<Sommet>();
-        List<Sommet> listVosin = new ArrayList<Sommet>();
-        ArrayList<Integer> CouleurOk = new ArrayList<>();
+        List<Sommet> listSommets;
+        List<Sommet> listVosin;
         listSommets = graphe.getSommets();
         int couleurmax = 0;
 
+        //On parcours tous les sommets dans l'ordre.
         for (Sommet s : listSommets) {
-            if (!CouleurOk.contains(s.getId())) {
-                if (s.getColor() == -1) {
-                    listVosin = s.getVoisins();
-                    int nbSv = listVosin.size();
-                    //System.out.println(nbSv);
-                    boolean couleurtrouver = false;
-                    while (!couleurtrouver) {
-                        for (Sommet sv : listVosin) {
-                            if (sv.getColor() != ActualColor) {
-                                nbSv--;
-                            }
+            //Si la couleur n'a pas été encore initialisé
+            if (s.getColor() == -1) {
+                listVosin = s.getVoisins();
+                int nbSv = listVosin.size();
+                boolean couleurtrouver = false;
+                //On recherche la couleur possible
+                while (!couleurtrouver) {
+                    //On reguarde la couleur de tous les voisins
+                    for (Sommet sv : listVosin) {
+                        if (sv.getColor() != ActualColor) {
+                            nbSv--;
                         }
-                        if (nbSv == 0) {
-                            couleurtrouver = true;
-                            s.setColor(ActualColor);
-                            //System.out.println(s.getId() + " est colorier en " + s.getColor());
-                            CouleurOk.add(s.getId());
-                            if(couleurmax<ActualColor){ couleurmax = ActualColor; }
-                            ActualColor = 0;
-                        } else {
-                            nbSv = listVosin.size();
-                        }
+                    }
+                    //Si tous les voisins on la même couleur
+                    if (nbSv == 0) {
+                        couleurtrouver = true;
+                        s.setColor(ActualColor);
+                        //On met a jour le nombre de couleur
+                        if(couleurmax<ActualColor){ couleurmax = ActualColor; }
+                        ActualColor = 0;
+                    }
+                    // Sinon on passe à la couleur suivante
+                    else {
+                        nbSv = listVosin.size();
                         ActualColor++;
                     }
+
                 }
             }
             else break;

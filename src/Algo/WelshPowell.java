@@ -12,10 +12,10 @@ public class WelshPowell extends Graphe {
 
     }
 
-    public int WelshPowell(Graphe graphe)  throws IOException {
+    public static int WelshPowell(Graphe graphe)  throws IOException {
         int ActualColor = 0;
         List<Sommet> listSommets = new ArrayList<Sommet>();
-        ArrayList<Sommet> listVosin = new ArrayList<Sommet>();
+        List<Sommet> listVosin = new ArrayList<Sommet>();
         boolean degreok = false;
         int min = 0;
         int couleurmax = 0;
@@ -23,17 +23,40 @@ public class WelshPowell extends Graphe {
         listSommets = graphe.getSommets();
         Collections.sort(listSommets, new CompareDegree());
 
-        for (Sommet s: listSommets) {
-            System.out.println(s);
+        //On parcours tous les sommets dans l'ordre.
+        for (Sommet s : listSommets) {
+            //Si la couleur n'a pas été encore initialisé
+            if (s.getColor() == -1) {
+                listVosin = s.getVoisins();
+                int nbSv = listVosin.size();
+                boolean couleurtrouver = false;
+                //On recherche la couleur possible
+                while (!couleurtrouver) {
+                    //On reguarde la couleur de tous les voisins
+                    for (Sommet sv : listVosin) {
+                        if (sv.getColor() != ActualColor) {
+                            nbSv--;
+                        }
+                    }
+                    //Si tous les voisins on la même couleur
+                    if (nbSv == 0) {
+                        couleurtrouver = true;
+                        s.setColor(ActualColor);
+                        //On met a jour le nombre de couleur
+                        if(couleurmax<ActualColor){ couleurmax = ActualColor; }
+                        ActualColor = 0;
+                    }
+                    // Sinon on passe à la couleur suivante
+                    else {
+                        nbSv = listVosin.size();
+                        ActualColor++;
+                    }
+                }
+            }
+            else break;
         }
-
 
         return couleurmax;
     }
 
-    public int compare(Sommet s1, Sommet s2) {
-        if (s1.getDegre() > s2.getDegre()) { return -1; }
-        else if (s1.getDegre() < s2.getDegre()){ return 1; }
-        return 0;
-    }
 }

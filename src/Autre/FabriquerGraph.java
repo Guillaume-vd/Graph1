@@ -18,53 +18,63 @@ public class FabriquerGraph {
 
     public Graphe FabriquerGraph() throws IOException {
         Graphe gaphe = new Graphe();
-        List<Sommet> listSommetOk = new ArrayList<Sommet>();
+        List<Sommet> listSommet = new ArrayList<Sommet>();
 
         BufferedReader in = new BufferedReader(new FileReader("src/flat1000_60_0.col"));
-        String line = "";
+        String line;
         String[] Sommet;
         String[] nbSommet;
         int nbS = 0;
         int Sommettrouver = 0;
-        boolean firstp = false;
-        Sommet[] tabSommet = new Sommet[1001];
+        boolean nbSommetTrouver = false;
 
+        //Connaitre le nombre total de sommet
         while ((line = in.readLine()) != null) {
-            //initialise tous les commets
-            if(line.contains("p ") && !firstp){
+            if(line.contains("p ")){
                 nbSommet = line.split(" ");
-                //Voir si conservé avec autre fichier
                 nbSommet = nbSommet[2].split(" ");
                 nbS = Integer.parseInt(nbSommet[0]);
-                //System.out.println(nbSommet[0]);
-                for(int i=1; i<=nbS; i++){
-                    Sommet sommet = new Sommet(i);
-                    gaphe.ajoutSommet(sommet);
-                    listSommetOk.add(sommet);
-                    tabSommet[i] = sommet;
-                }
+                break;
             }
+        }
+        in.close();
+
+        //Initialisation de tous les sommets
+        Sommet[] tabSommet = new Sommet[nbS+1];
+        for(int i=1; i<=nbS; i++){
+            Sommet sommet = new Sommet(i);
+            gaphe.ajoutSommet(sommet);
+            listSommet.add(sommet);
+            tabSommet[i] = sommet;
+        }
+
+        //Ajout des sommets au graph
+        BufferedReader file = new BufferedReader(new FileReader("src/flat1000_60_0.col"));
+        while ((line = file.readLine()) != null){
+            //Si la ligne contient un arc
             if(line.contains("e")){
                 Sommet = line.split(" ");
-                //if pour si du  text contient la lettre e avant
+                //Si la premiière lettre est bien un e
                 if(Sommet[0].contains("e")){
-                    for (int i=1; i<tabSommet.length; i++) {
+                    for (int i=1; i<=tabSommet.length; i++) {
                         if(Integer.parseInt(Sommet[1]) == tabSommet[i].getId()){Sommettrouver = i; break;}
                     }
-                    for(int k=1; k<tabSommet.length; k++){
+                    //Création de arc et ajout voisins
+                    for(int k=1; k<=tabSommet.length; k++){
+                        //Recherche dans le tableau de sommet la coreespondace
                         if(Integer.parseInt(Sommet[2]) == tabSommet[k].getId()){
                             tabSommet[Sommettrouver].ajouterVoisin(tabSommet[k]);
                             tabSommet[k].ajouterVoisin(tabSommet[Sommettrouver]);
                             Arc arc = new Arc(tabSommet[Sommettrouver],tabSommet[k]);
                             gaphe.ajoutArc(arc);
-                            //System.out.println(arc.getArrivee().getId()+" " + arc.getOrigine().getId());
                             break;
                         }
                     }
                 }
             }
         }
-        in.close();
+        file.close();
+
         return gaphe;
     }
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sommet {
-    private int id = 0;
-    private int degre = 0;
+    private int id;
+    private int degre;
     private List<Sommet> voisins;
-    private int color = -1;
+    private int color;
 
     public Sommet(int id) {
         this.id = id;

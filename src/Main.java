@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import Autre.FabriquerGraph;
+import Autre.InitCouleur;
 import Type.*;
 import Algo.*;
 
@@ -12,10 +13,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         long debut = 0;
         long fin = 0;
+        int nbCouleur = 0;
 
+        InitCouleur IC = new InitCouleur();
 
         Graphe gaphe = new Graphe();
         FabriquerGraph FG = new FabriquerGraph();
+
         debut = System.currentTimeMillis();
         gaphe = FG.FabriquerGraph();
         fin = System.currentTimeMillis() - debut;
@@ -23,16 +27,17 @@ public class Main {
 
         Greedy greedy = new Greedy();
         debut = System.currentTimeMillis();
-        int nbCouleurGD = greedy.Greedy(gaphe);
+        nbCouleur = greedy.Greedy(gaphe);
         fin = System.currentTimeMillis() - debut;
-        System.out.println("Le cacul algo Greedy à pris "+ fin +"ms avec " + nbCouleurGD+ " couleurs");
+        System.out.println("Le cacul algo Greedy à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
 
+        IC.InitCouleur(gaphe);
 
         WelshPowell WP = new WelshPowell();
         debut = System.currentTimeMillis();
-        int nbCouleurWp = WP.WelshPowell(gaphe);
+        nbCouleur = WP.WelshPowell(gaphe);
         fin = System.currentTimeMillis() - debut;
-        System.out.println("Le cacul algo WelshPowell à pris "+ fin +"ms avec " + nbCouleurWp+ " couleurs");
+        System.out.println("Le cacul algo WelshPowell à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
 
     }
 }
