@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import Autre.FabriquerGraph;
 import Type.*;
 import Algo.*;
 
@@ -28,8 +29,10 @@ public class Main {
 
 
         WelshPowell WP = new WelshPowell();
+        debut = System.currentTimeMillis();
         int nbCouleurWp = WP.WelshPowell(gaphe);
-        System.out.println(nbCouleurWp);
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("Le cacul algo WelshPowell à pris "+ fin +"ms avec " + nbCouleurWp+ " couleurs");
 
     }
 }
