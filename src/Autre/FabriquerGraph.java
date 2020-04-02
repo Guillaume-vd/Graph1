@@ -16,11 +16,11 @@ public class FabriquerGraph {
 
     }
 
-    public Graphe FabriquerGraph() throws IOException {
+    public Graphe FabriquerGraph(String NomFichier) throws IOException {
         Graphe gaphe = new Graphe();
         List<Sommet> listSommet = new ArrayList<Sommet>();
 
-        BufferedReader in = new BufferedReader(new FileReader("src/flat1000_60_0.col"));
+        BufferedReader in = new BufferedReader(new FileReader("src/Graphe/" + NomFichier));
         String line;
         String[] Sommet;
         String[] nbSommet;
@@ -49,7 +49,7 @@ public class FabriquerGraph {
         }
 
         //Ajout des sommets au graph
-        BufferedReader file = new BufferedReader(new FileReader("src/flat1000_60_0.col"));
+        BufferedReader file = new BufferedReader(new FileReader("src/Graphe/" + NomFichier));
         while ((line = file.readLine()) != null){
             //Si la ligne contient un arc
             if(line.contains("e")){
