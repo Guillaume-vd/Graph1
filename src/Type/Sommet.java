@@ -8,12 +8,14 @@ public class Sommet {
     private int degre;
     private List<Sommet> voisins;
     private int color;
+    private int NbVoisinColore;
 
     public Sommet(int id) {
         this.id = id;
         this.degre = 0;
         this.voisins = new ArrayList<Sommet>();
         this.color = -1;
+        this.NbVoisinColore = 0;
     }
 
     public boolean equals(Sommet autreSommet){
@@ -44,5 +46,13 @@ public class Sommet {
     public void setColor(int color){ this.color = color; }
 
     public int getColor(){ return color; }
+
+    public void incrementerColorVoisin(){
+        this.NbVoisinColore++;
+    }
+
+    public int getNbVoisinColor(){
+        return NbVoisinColore;
+    }
 
 }
