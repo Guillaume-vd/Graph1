@@ -6,13 +6,10 @@ import Type.*;
 import java.util.*;
 
 public class WelshPowell extends Graphe {
-
-    public WelshPowell(){
-
-    }
-
-    public static int WelshPowell(Graphe graphe) {
-        int ActualColor = 0;
+	private int CouleurMax;
+	
+    public WelshPowell(Graphe graphe){
+    	int ActualColor = 0;
         List<Sommet> listSommets;
         List<Sommet> listVosin;
         int couleurmax = 0;
@@ -51,7 +48,11 @@ public class WelshPowell extends Graphe {
             }
         }
 
-        return couleurmax;
+        this.CouleurMax = couleurmax;
+    }
+    
+    public int getCouleurMax(){
+        return this.CouleurMax;
     }
 
 }

@@ -6,23 +6,22 @@ import Type.Sommet;
 import java.util.List;
 
 public class Greedy {
+	private int CouleurMax;
 
-    public Greedy(){
-
-    }
-
-    public static int Greedy(Graphe graphe){
-        int ActualColor = 0;
+    public Greedy(Graphe graphe){
+    	int ActualColor = 0;
         List<Sommet> listSommets;
         List<Sommet> listVosin;
         listSommets = graphe.getSommets();
         int couleurmax = 0;
+        int nbSv;
+        boolean couleurtrouver;
 
         //On parcours tous les sommets dans l'ordre.
         for (Sommet s : listSommets) {
             listVosin = s.getVoisins();
-            int nbSv = listVosin.size();
-            boolean couleurtrouver = false;
+            nbSv = listVosin.size();
+            couleurtrouver = false;
             //On recherche la couleur possible
             while (!couleurtrouver) {
                 //On reguarde la couleur de tous les voisins
@@ -47,6 +46,10 @@ public class Greedy {
 
             }
         }
-        return couleurmax;
+        this.CouleurMax = couleurmax;
+    }
+    
+    public int getCouleurMax(){
+        return this.CouleurMax;
     }
 }
