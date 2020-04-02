@@ -23,22 +23,17 @@ public class FabriquerGraph {
         BufferedReader in = new BufferedReader(new FileReader("src/Graphe/" + NomFichier));
         String line;
         String[] Sommet;
-        String[] nbSommet;
         int nbS = 0;
         int Sommettrouver = 0;
-        boolean nbSommetTrouver = false;
+        boolean cont = true;
+        int k;
 
         //Connaitre le nombre total de sommet
-        while ((line = in.readLine()) != null) {
-            if(line.contains("p ")){
-                nbSommet = line.split(" ");
-                if(nbSommet[0].contains("p")){
-                    nbSommet = nbSommet[2].split(" ");
-                    nbS = Integer.parseInt(nbSommet[0]);
-                    break;
-                }
-            }
+        line = in.readLine();
+        while((line != null) && (line.charAt(0) != 'p')){
+        	line = in.readLine();
         }
+        nbS = Integer.parseInt(line.split(" ")[2]);
         in.close();
 
         //Initialisation de tous les sommets
@@ -61,16 +56,19 @@ public class FabriquerGraph {
                     for (int i=1; i<=tabSommet.length; i++) {
                         if(Integer.parseInt(Sommet[1]) == tabSommet[i].getId()){Sommettrouver = i; break;}
                     }
+                    cont = true;
+                    k = 1;
                     //Création de arc et ajout voisins
-                    for(int k=1; k<=tabSommet.length; k++){
+                    while((k <= tabSommet.length) && cont){
                         //Recherche dans le tableau de sommet la coreespondace
                         if(Integer.parseInt(Sommet[2]) == tabSommet[k].getId()){
                             tabSommet[Sommettrouver].ajouterVoisin(tabSommet[k]);
                             tabSommet[k].ajouterVoisin(tabSommet[Sommettrouver]);
                             Arc arc = new Arc(tabSommet[Sommettrouver],tabSommet[k]);
                             gaphe.ajoutArc(arc);
-                            break;
+                            cont = false;
                         }
+                        k++;
                     }
                 }
             }
