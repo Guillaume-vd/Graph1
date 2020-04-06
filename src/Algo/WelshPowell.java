@@ -9,46 +9,27 @@ public class WelshPowell extends Graphe {
 	private int CouleurMax;
 	
     public WelshPowell(Graphe graphe){
-    	int ActualColor = 0;
         List<Sommet> listSommets;
-        List<Sommet> listVosin;
-        int couleurmax = 0;
-        int nbSv ;
-        boolean couleurtrouver;
-
-        listSommets = graphe.getSommets();
+        
+        listSommets = graphe.getSommetsClone();
         Collections.sort(listSommets, new CompareDegree());
-
-        //On parcours tous les sommets dans l'ordre.
-        for (Sommet s : listSommets) {
-            listVosin = s.getVoisins();
-            nbSv = listVosin.size();
-            couleurtrouver = false;
-            //On recherche la couleur possible
-            while (!couleurtrouver) {
-                //On reguarde la couleur de tous les voisins
-                for (Sommet sv : listVosin) {
-                    if (sv.getColor() != ActualColor) {
-                        nbSv--;
-                    }
-                }
-                //Si tous les voisins on la même couleur
-                if (nbSv == 0) {
-                    couleurtrouver = true;
-                    s.setColor(ActualColor);
-                    //On met a jour le nombre de couleur
-                    if(couleurmax<ActualColor){ couleurmax = ActualColor; }
-                    ActualColor = 0;
-                }
-                // Sinon on passe à la couleur suivante
-                else {
-                    nbSv = listVosin.size();
-                    ActualColor++;
-                }
-            }
+        int i;
+        int couleur = 0;
+        while(0 < listSommets.size()) {
+        	couleur ++;
+        	listSommets.get(0).setColor(couleur);
+        	i = 0;
+        	while(i < listSommets.size()) {
+        		if(!listSommets.get(i).voisinColor(couleur)) {
+        			listSommets.remove(i).setColor(couleur);
+        		}
+        		else {
+        			i++;
+        		}
+        	}
         }
-
-        this.CouleurMax = couleurmax;
+        
+        this.CouleurMax = couleur;
     }
     
     public int getCouleurMax(){

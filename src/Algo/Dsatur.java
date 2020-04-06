@@ -11,23 +11,15 @@ public class Dsatur {
 	private int CouleurMax;
 	
 	public Dsatur(Graphe graphe){
-        List<Sommet> listSommets;
-        listSommets = graphe.getSommets();
+        List<Sommet> listSommets = graphe.getSommetsClone();
         Collections.sort(listSommets, new CompareDegree());
         int couleurmax = 0;
-        //Sommet sommet = listSommets.get(0);
-        //sommet.setColor(0);
-
-
         //On parcours tous les sommets dans l'ordre.
         while (!listSommets.isEmpty()) {
-            Sommet s = listSommets.get(0);
             //On recherche la couleur possible
-            s.setColor();
-            if(s.getColor() > couleurmax) {
-            	couleurmax = s.getColor();
+            if(listSommets.remove(0).setColor() > couleurmax) {
+            	couleurmax ++;
             }
-            listSommets.remove(s);
             Collections.sort(listSommets, new CompareNbVoisinColorDegree());
         }
         this.CouleurMax = couleurmax;
