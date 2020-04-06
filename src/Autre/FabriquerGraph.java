@@ -11,13 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FabriquerGraph {
+	private Graphe graphe;
 
-    public FabriquerGraph(){
-
-    }
-
-    public Graphe FabriquerGraph(String NomFichier) throws IOException {
-        Graphe gaphe = new Graphe();
+    public FabriquerGraph(String NomFichier) throws IOException{
+    	Graphe graphe = new Graphe();
         List<Sommet> listSommet = new ArrayList<Sommet>();
 
         BufferedReader in = new BufferedReader(new FileReader("src/Graphe/" + NomFichier));
@@ -40,7 +37,7 @@ public class FabriquerGraph {
         Sommet[] tabSommet = new Sommet[nbS+1];
         for(int i=1; i<=nbS; i++){
             Sommet sommet = new Sommet(i);
-            gaphe.ajoutSommet(sommet);
+            graphe.ajoutSommet(sommet);
             listSommet.add(sommet);
             tabSommet[i] = sommet;
         }
@@ -65,7 +62,7 @@ public class FabriquerGraph {
                             tabSommet[Sommettrouver].ajouterVoisin(tabSommet[k]);
                             tabSommet[k].ajouterVoisin(tabSommet[Sommettrouver]);
                             Arc arc = new Arc(tabSommet[Sommettrouver],tabSommet[k]);
-                            gaphe.ajoutArc(arc);
+                            graphe.ajoutArc(arc);
                             cont = false;
                         }
                         k++;
@@ -74,7 +71,10 @@ public class FabriquerGraph {
             }
         }
         file.close();
+        this.graphe = graphe;
+    }
 
-        return gaphe;
+    public Graphe getGrape() throws IOException {
+        return this.graphe;
     }
 }

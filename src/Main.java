@@ -15,18 +15,16 @@ public class Main {
         long fin;
         int nbCouleur;
 
-        InitCouleur IC = new InitCouleur();
-
         //Pour chosir son fichier parmis les fichiers contenu dans graph
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le nom du fichier avec l'extention:");
         String NomFichier = sc.nextLine();
 
-        Graphe graphe = new Graphe();
-        FabriquerGraph FG = new FabriquerGraph();
-
         debut = System.currentTimeMillis();
-        graphe = FG.FabriquerGraph(NomFichier);
+        Graphe graphe = new Graphe();
+        FabriquerGraph FG = new FabriquerGraph(NomFichier);
+        graphe = FG.getGrape();
+        InitCouleur IC = new InitCouleur(graphe);
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le graphe à été générer en " + fin+"ms");
 
@@ -36,7 +34,7 @@ public class Main {
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le cacul algo Greedy à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
 
-        IC.InitCouleur(graphe);
+        IC.resetColor();
 
         debut = System.currentTimeMillis();
         WelshPowell WP = new WelshPowell(graphe);
@@ -44,13 +42,14 @@ public class Main {
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le cacul algo WelshPowell à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
         
-        IC.InitCouleur(graphe);
+        IC.resetColor();
 
         debut = System.currentTimeMillis();
         Dsatur Ds = new Dsatur(graphe);
         nbCouleur = Ds.getCouleurMax();
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le cacul algo Dsatur à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
-
+        
+        sc.close();
     }
 }
