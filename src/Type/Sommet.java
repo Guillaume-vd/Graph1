@@ -59,21 +59,22 @@ public class Sommet {
     
     public void setColor() {
     	List<Sommet> s = this.getColorVoisins();
-    	int c = 1;
-    	int i;
+    	int c = 0;
+    	int i = 0;
     	boolean find = false;
     	boolean continuer = true; 
     	while(continuer) {
-    		for(i = 0; i < s.size(); i++) {
+    		find = false;
+    		i = 0;
+    		c++;
+    		while(!find && i < s.size()) {
     			if(s.get(i).getColor() == c) {
     				find = true;
+    				s.remove(i);
     			}
+    			i++;
     		}
-    		if(find) {
-    			find = false;
-    			c++;
-    		}
-    		else {
+    		if(!find) {
     			continuer = false;
     		}
     	}
