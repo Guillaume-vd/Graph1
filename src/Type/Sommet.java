@@ -57,7 +57,7 @@ public class Sommet {
 
     public void setColor(int color){ this.color = color; }
     
-    public void setColor() {
+    public int setColor() {
     	List<Sommet> s = this.getColorVoisins();
     	int c = 0;
     	int i = 0;
@@ -79,9 +79,25 @@ public class Sommet {
     		}
     	}
     	this.color = c;
+    	return c;
     }
     
     public int getColor(){ return color; }
+    
+    public boolean voisinColor(int couleur) {
+    	boolean find = false;
+    	int i = 0;
+    	List<Sommet> voisins = this.getVoisins();
+    	while(!find & i < voisins.size()) {
+    		if(voisins.get(i).getColor() == couleur) {
+    			find = true;
+    		}
+    		else {
+    			i++;
+    		}
+    	}
+    	return find;
+    }
 
     public void incrementerColorVoisin(){
         this.NbVoisinColore++;

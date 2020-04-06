@@ -48,6 +48,15 @@ public class Graphe {
     public List<Sommet> getSommets() {
         return this.sommets;
     }
+    
+    public List<Sommet> getSommetsClone() {
+    	List<Sommet> s = this.getSommets();
+        List<Sommet> s2 = new ArrayList<Sommet>();
+        for (Sommet sommet : s) {
+			s2.add(sommet);
+		}
+        return s2;
+    }
 
     public void ajoutArc(Arc a) {
         this.arcs.add(a);
