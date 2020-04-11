@@ -1,6 +1,5 @@
 package Autre;
 
-import Type.Arc;
 import Type.Graphe;
 import Type.Sommet;
 
@@ -61,8 +60,6 @@ public class FabriquerGraph {
                         if(Integer.parseInt(Sommet[2]) == tabSommet[k].getId()){
                             tabSommet[Sommettrouver].ajouterVoisin(tabSommet[k]);
                             tabSommet[k].ajouterVoisin(tabSommet[Sommettrouver]);
-                            Arc arc = new Arc(tabSommet[Sommettrouver],tabSommet[k]);
-                            graphe.ajoutArc(arc);
                             cont = false;
                         }
                         k++;
