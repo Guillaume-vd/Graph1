@@ -30,21 +30,39 @@ public class Main {
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le graphe à été générer en " + fin+"ms");
 
-        //Algo Greedy
+        //Algo Greedy avec tri par ordre croissant
         debut = System.currentTimeMillis();
-        Greedy greedy = new Greedy(graphe);
+        Greedy greedy = new Greedy(graphe, true);
         nbCouleur = greedy.getCouleurMax();
         fin = System.currentTimeMillis() - debut;
-        System.out.println("Le cacul algo Greedy à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
+        System.out.println("Le cacul algo Greedy par tri croissant à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
+
+        IC.resetColor();
+        
+        //Algo Greedy avec tri par ordre decroissant
+        debut = System.currentTimeMillis();
+        greedy = new Greedy(graphe, false);
+        nbCouleur = greedy.getCouleurMax();
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("Le cacul algo Greedy par tri de décroissant à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
 
         IC.resetColor();
 
-        //Algo WelshPowell
+        //Algo WelshPowell avec tri par ordre croissant
         debut = System.currentTimeMillis();
-        WelshPowell WP = new WelshPowell(graphe);
+        WelshPowell WP = new WelshPowell(graphe, true);
         nbCouleur = WP.getCouleurMax();
         fin = System.currentTimeMillis() - debut;
-        System.out.println("Le cacul algo WelshPowell à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
+        System.out.println("Le cacul algo WelshPowell par tri croissant à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
+        
+        IC.resetColor();
+        
+        //Algo WelshPowell avec tri par ordre decroissant
+        debut = System.currentTimeMillis();
+        WP = new WelshPowell(graphe, false);
+        nbCouleur = WP.getCouleurMax();
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("Le cacul algo WelshPowell par tri decroissant à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
         
         IC.resetColor();
 

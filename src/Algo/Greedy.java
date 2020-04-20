@@ -7,13 +7,19 @@ import java.util.Collections;
 import java.util.List;
 
 import Autre.CompareDegree;
+import Autre.CompareDegreeDecroissant;
 
 public class Greedy {
 	private int CouleurMax;
 
-    public Greedy(Graphe graphe){
+    public Greedy(Graphe graphe, boolean croissant){
     	List<Sommet> listSommets = graphe.getSommetsClone();
-        Collections.sort(listSommets, new CompareDegree());
+    	if(croissant) {
+        	Collections.sort(listSommets, new CompareDegree());
+        }
+        else {
+        	Collections.sort(listSommets, new CompareDegreeDecroissant());
+        }
         int couleurmax = 0;
         //On parcours tous les sommets dans l'ordre.
         while (!listSommets.isEmpty()) {

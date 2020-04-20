@@ -3,7 +3,7 @@ package Algo;
 import java.util.Collections;
 import java.util.List;
 
-import Autre.CompareDegree;
+import Autre.CompareDegreeDecroissant;
 import Autre.CompareNbVoisinColorDegree;
 import Type.*;
 
@@ -12,7 +12,7 @@ public class Dsatur {
 	
 	public Dsatur(Graphe graphe){
         List<Sommet> listSommets = graphe.getSommetsClone();
-        Collections.sort(listSommets, new CompareDegree());
+        Collections.sort(listSommets, new CompareDegreeDecroissant());
         int couleurmax = 0;
         //On parcours tous les sommets dans l'ordre.
         while (!listSommets.isEmpty()) {
