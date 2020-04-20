@@ -19,15 +19,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le nom du fichier avec l'extention:");
         String NomFichier = sc.nextLine();
+        sc.close();
 
+        //Création du graph
         debut = System.currentTimeMillis();
-        Graphe graphe = new Graphe();
+        Graphe graphe;
         FabriquerGraph FG = new FabriquerGraph(NomFichier);
         graphe = FG.getGrape();
         InitCouleur IC = new InitCouleur(graphe);
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le graphe à été générer en " + fin+"ms");
 
+        //Algo Greedy
         debut = System.currentTimeMillis();
         Greedy greedy = new Greedy(graphe);
         nbCouleur = greedy.getCouleurMax();
@@ -36,6 +39,7 @@ public class Main {
 
         IC.resetColor();
 
+        //Algo WelshPowell
         debut = System.currentTimeMillis();
         WelshPowell WP = new WelshPowell(graphe);
         nbCouleur = WP.getCouleurMax();
@@ -44,12 +48,12 @@ public class Main {
         
         IC.resetColor();
 
+        //Algo Dsatur
         debut = System.currentTimeMillis();
         Dsatur Ds = new Dsatur(graphe);
         nbCouleur = Ds.getCouleurMax();
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le cacul algo Dsatur à pris "+ fin +"ms avec " + nbCouleur+ " couleurs");
         
-        sc.close();
     }
 }
