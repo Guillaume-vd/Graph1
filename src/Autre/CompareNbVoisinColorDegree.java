@@ -10,9 +10,7 @@ public class CompareNbVoisinColorDegree implements Comparator<Sommet> {
         if (s1.getDifferentColor() > s2.getDifferentColor()){ return -1; }
         else if (s1.getDifferentColor() < s2.getDifferentColor()){ return 1; }
         else {
-        	if (s1.getDegre() > s2.getDegre()){ return -1; }
-            else if (s1.getDegre() < s2.getDegre()){ return 1; }
-            return 0;
+        	return s2.getDegre() - s1.getDegre();
         }
     }
 
