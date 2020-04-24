@@ -20,6 +20,9 @@ public class Dsatur {
             if(listSommets.remove(0).setColor() > couleurmax) {
             	couleurmax ++;
             }
+            for(int i = 0; i < listSommets.size(); i++) {
+            	listSommets.get(i).setDifferentColor();
+            }
             Collections.sort(listSommets, new CompareNbVoisinColorDegree());
         }
         this.CouleurMax = couleurmax;
