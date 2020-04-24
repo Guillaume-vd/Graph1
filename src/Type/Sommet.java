@@ -8,14 +8,12 @@ public class Sommet {
     private int degre;
     private List<Sommet> voisins;
     private int color;
-    private int NbVoisinColore;
 
     public Sommet(int id) {
         this.id = id;
         this.degre = 0;
         this.voisins = new ArrayList<Sommet>();
         this.color = -1;
-        this.NbVoisinColore = 0;
     }
 
     public boolean equals(Sommet autreSommet){
@@ -55,7 +53,9 @@ public class Sommet {
     	return sommets;
     }
 
-    public void setColor(int color){ this.color = color; }
+    public void setColor(int color){ 
+    	this.color = color;
+    	}
     
     public int setColor() {
     	List<Sommet> s = this.getColorVoisins();
@@ -98,13 +98,19 @@ public class Sommet {
     	}
     	return find;
     }
-
-    public void incrementerColorVoisin(){
-        this.NbVoisinColore++;
-    }
-
-    public int getNbVoisinColor(){
-        return NbVoisinColore;
+    
+    
+    public int getDifferentColor() {
+    	int i;
+    	List<Integer> l = new ArrayList<Integer>();
+    	for(i = 0; i < this.voisins.size(); i++) {
+    		if(this.voisins.get(i).getColor() != 0) {
+    			if(!l.contains((this.voisins.get(i).getColor()))) {
+    				l.add(this.voisins.get(i).getColor());
+    			}
+    		}
+    	}
+    	return l.size();
     }
 
 }
